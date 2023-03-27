@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %} 
+    <link rel="stylesheet" href="{% static 'autenticacao/css/style.css' %}">
+{% endblock %}
+
+{% block title %}Cadastre-se{% endblock %}
+
+
+{% block container %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 sidebar">
+            <div class="logo_sidebar">
+
+                <h2 class="logo">
+                    <img class="img_logo_sidebar" src="{% static 'autenticacao/img/logo_nutri_lab.png' %}">
+                </h2>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-9">
+            <div class="area_cadastrar">
+                <h2 class="titulo">Welcome</h2>
+                <p class="sub-titulo">Create your account</p>
+                <hr>
+
+                {% if messages %}
+
+                    {% for message in messages %}
+                        <div class="alert {{message.tags}}">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+
+                {% endif %}
+                
+                <form action="{% url 'validate_register' %}" method="POST">
+                    {% csrf_token %}
+                    <span class="bold">Nome de usuário</span>
+                    <input class="form-control input-form" name="username" type="text" placeholder="Digite seu nome...">
+                    <br>
+                    <span class="bold">E-mail</span>
+                    <input class="form-control input-form" name="email" type="email" placeholder="Digite seu E-mail...">
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <span class="bold">Senha</span>
+                            <input class="form-control input-form" name="password" type="password"
+                                placeholder="Digite sua senha...">
+                        </div>
+
+                        <div class="col-md">
+                            <span class="bold">Confirmar senha</span>
+                            <input class="form-control input-form" name="confirm_password" type="password"
+                                placeholder="Confirme sua senha...">
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn-first">Registrar</button>
+
+                </form>
+
+                <h3 style="position: absolute; bottom: 65px; font-weight: bold">Already have an account ?&nbsp <a
+                        class="btn btn-outline-success btn-lg" href="/auth/login/">Log in</a> </h3>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}
